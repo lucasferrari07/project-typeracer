@@ -1,48 +1,21 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import './App.css';
+import Quote from './Quote';
+import Typer from './Typer';
 
-class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      quote: 'They don\'t know that we know they know we know.',
-      typedText: ''
-    };
-    this.handleChange = this.handleChange.bind(this);
-  }
+const App = () => {
+  const quoteText = 'It is not the mountain we conquer but ourselves.';
+  const [typedText, setTyped] = useState('');
 
-  handleChange(event) {
-    const typedText = event.target.value;
-    this.setState({ typedText: typedText });
-  }
-
-  getDisplayQuote() {
-    const quoteArray = this.state.quote.split('');
-    const typedArray = this.state.typedText.split('');
-    return (
-      quoteArray.map((letter, index) => {
-        if (!(index in typedArray)) {
-          return letter;
-        }
-        if (letter === typedArray[index]) {
-          return <span className="right-letter">{letter}</span>;
-        }
-        return <span className="wrong-letter">{letter}</span>;
-      })
-    );
-  }
-
-  render() {
-    return (
-      <div className="App">
-        <h1>Typeracer</h1>
-        <form>
-          <p>{this.getDisplayQuote()}</p>
-          <input type='text' onChange={this.handleChange} />
-        </form>
-      </div>
-    );
-  }
-}
+  return (
+    <div className="App">
+      <h1>Typeracer</h1>
+      <form>
+        <Quote typedText={typedText} quoteText={quoteText} />
+        <Typer onInputChange={setTyped} />
+      </form>
+    </div>
+  );
+};
 
 export default App;

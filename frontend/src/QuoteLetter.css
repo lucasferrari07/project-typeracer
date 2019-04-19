@@ -1,0 +1,9 @@
+.right-letter {
+    color: green;
+    background-color: lightgreen;
+}
+
+.wrong-letter {
+    color: red;
+    background-color: lightcoral;
+}
