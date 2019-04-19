@@ -1,14 +1,21 @@
 import React from 'react';
-import QuoteLetter from './QuoteLetter';
+import QuoteWord from './QuoteWord';
+
 // import { zipWith } from 'lodash';
 
-const Quote = ({ quoteText, typedText }) => {
-  const quoteArray = quoteText.split('');
+const Quote = ({ quoteArray, typedText, currentWord }) => {
   const typedArray = typedText.split('');
   return (
-    // zipWith()
-    // eslint-disable-next-line max-len
-    quoteArray.map((letter, index) => <QuoteLetter key={index.toString()} quoteLetter={letter} typedLetter={typedArray[index]} />)
+    quoteArray.map(
+      (word, wordIndex) => (
+        <QuoteWord
+          key={wordIndex.toString()}
+          word={word}
+          isCurrent={wordIndex === currentWord}
+          typedArray={typedArray}
+        />
+      ),
+    )
   );
 };
 
