@@ -1,8 +1,20 @@
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
+import './Typer.css';
 
-const Typer = ({ onInputChange }) => {
-  const handleChange = e => onInputChange(e.target.value);
-  return (<input type="text" onChange={handleChange} />);
+const handleInputChangeWith = fn => e => fn(e.target.value);
+const Typer = ({ expectedWord, onInputChange, onWordExact }) => {
+  const textInput = useRef();
+  useEffect(() => {
+    textInput.current.focus();
+  });
+  const handleInputChange = handleInputChangeWith((typed) => {
+    if (typed === expectedWord) {
+      textInput.current.value = '';
+      onWordExact();
+    }
+    onInputChange(textInput.current.value);
+  });
+  return (<input ref={textInput} type="text" onChange={handleInputChange} />);
 };
 
 export default Typer;
