@@ -2,8 +2,10 @@ import React from 'react';
 import QuoteLetter from './QuoteLetter';
 import './QuoteWord.css';
 
-const QuoteWord = ({ word, isCurrent, typedArray }) => {
-  const wordArray = word.split('');
+const QuoteWord = ({
+  word, isCurrent, intervals,
+}) => {
+  const wordArray = word.text.split('');
   return (
     <span className={isCurrent ? 'current-word' : ''}>
       {wordArray.map(
@@ -11,7 +13,8 @@ const QuoteWord = ({ word, isCurrent, typedArray }) => {
           <QuoteLetter
             key={index.toString()}
             quoteLetter={letter}
-            typedLetter={typedArray[index]}
+            offset={word.offset + index}
+            intervals={intervals}
           />
         ),
       )}

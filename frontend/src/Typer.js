@@ -2,7 +2,9 @@ import React, { useRef, useEffect } from 'react';
 import './Typer.css';
 
 const handleInputChangeWith = fn => e => fn(e.target.value);
-const Typer = ({ expectedWord, onInputChange, onWordExact }) => {
+const Typer = ({
+  expectedWord, onInputChange, onWordExact, maxLength,
+}) => {
   const textInput = useRef();
   useEffect(() => {
     textInput.current.focus();
@@ -14,7 +16,7 @@ const Typer = ({ expectedWord, onInputChange, onWordExact }) => {
     }
     onInputChange(textInput.current.value);
   });
-  return (<input ref={textInput} type="text" onChange={handleInputChange} />);
+  return (<input ref={textInput} type="text" onChange={handleInputChange} maxLength={maxLength} />);
 };
 
 export default Typer;
